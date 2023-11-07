@@ -1,3 +1,5 @@
+
+import React from 'react';
 import {useNavigate} from 'react-router-dom'
 import profile from "../image/profile.png"
 import email from "../image/email.png"
@@ -5,7 +7,8 @@ import pass from "../image/pass.png"
 
 
 
-export const Form = ()=> {
+export const Form = (props)=> {
+  
   const navigate = useNavigate()
   return (
     <div className="main">
@@ -30,7 +33,8 @@ export const Form = ()=> {
              <input type="password" placeholder="password" className="name"/>
            </div>
           <div className="login-button">
-          <button onClick ={() => navigate('home')}>Login</button>
+          <button onClick ={() => {navigate('home')}}>Login</button>
+          
           </div>
            
             <p className="link">

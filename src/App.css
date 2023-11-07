@@ -65,13 +65,18 @@ button{
     width: 380px;
     height: 50px;
     border-radius: 60px;
-    background-color: #b103fc;
+    background-color: #e88be8;
     color: white;
     font-size: 25px;
     border: none;
 }
+.UserData{
+padding-left: 35%;
+
+}
 .login-button{
     padding-top: 25px;
+    
 }
 
 .link{
@@ -82,16 +87,36 @@ button{
      color: blue;
  }
  .container{
-  background-color :beige;
+  background-color :black;
   height: 600px;
   width : 100%;
  }
  .portrait{
-  height: 400px;
-  width : 400px;
-  padding-top: 200px;
+  height: 350px;
+  width : 350px;
+  padding-top: 90px;
+  padding-left: 80px;
+  object-fit: contain;
   
  }
  .text{
   padding-top: 80px;
+ }
+ .text1{
+  white-space: nowrap;
+  overflow: hidden;
+  
+ }
+ .text2{
+  display: inline-block;
+  color: #e1e3eb;
+  
+ }
+ .col1{
+  padding-top: 80px;
+  padding-left: 10px;
+ }
+ .container{
+  margin-top: 10px;
+
  }

@@ -1,27 +1,55 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {useEffect, useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export class Home extends Component{
-  render() {
-    return (
-      <Container className = "container">
-                <Row>
-                    <Col><img   className = "portrait" src ="https://randomuser.me/api/portraits/women/74.jpg"/></Col>
-                    <Col className = "text"><h1> Hello , My name is Mirjana.</h1>
-                    <h2>This is some basic information about me.</h2>
-                    <h3>Email: Mirjana.zivadinovic@example.com<br></br>Username: greenkoala278<br></br>
-                    AGe: 26<br></br>
-                    DOB: 7-12-1997<br>
-              </br>
-              Address: Street no: 730, Varvarin, podunavlje, Serbia</h3><br></br>
-              <button type="button" class="btn btn-info">How Can I help you?</button>
-                    </Col>
-                </Row>
-            </Container>
-    )
-  }
+
+
+function Home(){
+   
+   
+  const [data, setData] = useState([])
+   const apiget=()=>{
+fetch("https://randomuser.me/api/")
+.then((response)=>response.json())
+.then((json)=>{
+  console.log(json);
+  setData(json);
+  console.log(data.results[0].gender)
+
+})
+   };
+   
+
+   return(
+    <>
+    
+
+   <div className='UserData'>< button onClick ={()=>{apiget()}}>User Data</button></div>
+   <Container className = "container">
+      <Row>
+         <Col>
+ 
+   <div className='col1'><div className = 'text1'><h4 className = 'text2'> Name :</h4> <h5 className='text2'>{data.results[0].name.title}  {data.results[0].name.first}   {data.results[0].name.last}</h5></div>
+   
+   <div className='text1'><h4 className='text2'>DOB: </h4><h5 className='text2'>{data.results[0].dob.date}</h5></div>
+   <div className='text1'><h4 className='text2'>Age: </h4><h5 className='text2'>{data.results[0].dob.age}</h5></div>
+   
+   
+   <div className = 'text1'><h4 className='text2'>Address: </h4> <h5 className='text2'>{data.results[0].location.street.number} {data.results[0].location.street.name} {data.results[0].location.street.number} {data.results[0].location.city} {data.results[0].location.state} {data.results[0].location.country}</h5> </div>
+   
+<div className = 'text1'><h4 className='text2'>Email: </h4> <h5 className='text2'>{data.results[0].email}</h5></div>
+   <div className = 'text1'><h4 className='text2'>Phone number: </h4><h5 className='text2'>{data.results[0].cell}</h5></div> </div></Col>
+<Col><img  className='portrait' src = {data.results[0].picture.medium}/></Col>
+ </Row>
+   </Container>
+    </>
+   )
+  
+  
+  
 }
 
-export default Home
+export default Home;
+

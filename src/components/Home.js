@@ -1,55 +1,78 @@
-import React, {Component} from 'react';
-import {useEffect, useState} from "react";
+import React, { Component } from 'react'
+import {Card} from "antd";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Form} from './Form';
 
-
-
-function Home(){
-   
-   
-  const [data, setData] = useState([])
-   const apiget=()=>{
-fetch("https://randomuser.me/api/")
-.then((response)=>response.json())
-.then((json)=>{
-  console.log(json);
-  setData(json);
-  console.log(data.results[0].gender)
-
-})
-   };
-   
-
-   return(
-    <>
-    
-
-   <div className='UserData'>< button onClick ={()=>{apiget()}}>User Data</button></div>
-   <Container className = "container">
-      <Row>
-         <Col>
+export class Home extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      data: [],
+      loading: false,
+    }
+  }
+  componentDidMount(){
+    fetch("https://randomuser.me/api/?seed=foobar")
+    .then((response)=>response.json())
+    .then((response)=>{
+      this.setState({
+        data: response.results,
+        loading: true
+      })
+    })
+  }
  
-   <div className='col1'><div className = 'text1'><h4 className = 'text2'> Name :</h4> <h5 className='text2'>{data.results[0].name.title}  {data.results[0].name.first}   {data.results[0].name.last}</h5></div>
-   
-   <div className='text1'><h4 className='text2'>DOB: </h4><h5 className='text2'>{data.results[0].dob.date}</h5></div>
-   <div className='text1'><h4 className='text2'>Age: </h4><h5 className='text2'>{data.results[0].dob.age}</h5></div>
-   
-   
-   <div className = 'text1'><h4 className='text2'>Address: </h4> <h5 className='text2'>{data.results[0].location.street.number} {data.results[0].location.street.name} {data.results[0].location.street.number} {data.results[0].location.city} {data.results[0].location.state} {data.results[0].location.country}</h5> </div>
-   
-<div className = 'text1'><h4 className='text2'>Email: </h4> <h5 className='text2'>{data.results[0].email}</h5></div>
-   <div className = 'text1'><h4 className='text2'>Phone number: </h4><h5 className='text2'>{data.results[0].cell}</h5></div> </div></Col>
-<Col><img  className='portrait' src = {data.results[0].picture.medium}/></Col>
- </Row>
-   </Container>
-    </>
-   )
-  
-  
-  
+  render() {
+    var{data, loading} = this.state
+    if(!loading){
+    return (
+      <div>
+        loading...
+      </div>
+    )
+    }
+    else{
+      return(
+        <div>
+         
+            {data.map(datas=>(
+              <div>
+              <img  className='portrait1' src = {datas.picture.medium}/>
+              <Card className = "card">
+              <div className = 'text4'> <h5 className='text2'>{datas.name.title} {datas.name.first}   {datas.name.last}</h5></div>
+              </Card>
+              <Card className='container'>
+              <Container className >
+                <Row>
+                   <Col> 
+                   <div className='text1'> <h4 className='text2'>DOB :</h4><div className = "myDiv">{datas.dob.date}</div></div>
+                   <div className='text1'> <h4 className='text2'>Age :</h4><div className = "myDiv">{datas.dob.age}</div></div>
+              </Col>
+              <Col>
+              <div className='text1'> <h4 className='text2'>Email:</h4><div className = "myDiv">{datas.email}</div></div>
+              <div className='text1'> <h4 className='text2'>Phone:</h4><div className = "myDiv">{datas.cell}</div></div>
+              </Col>
+              <div className='text1'> <h4 className='text2'>Address: </h4><div className = "myDiv1">{datas.location.street.number} {datas.location.street.name} {datas.location.city} {datas.location.state} {datas.location.country}</div></div>
+                </Row>
+              </Container>
+             </Card>
+            
+             </div>
+          
+            )
+            )
+            
+    }
+
+         
+        </div>
+      )
+    }
+  }
 }
 
-export default Home;
+export default Home
 
+    

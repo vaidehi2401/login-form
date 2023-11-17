@@ -18,7 +18,6 @@ export const Form = ()=> {
       const newData = await response.json();
       setData(newData);
     };
-  
     fetchData();
   });
   const email = data;
@@ -29,6 +28,7 @@ export const Form = ()=> {
  if(username === email.results[0].email){
   navigate('home')
  }
+ 
   }
   
   return (
